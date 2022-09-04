@@ -15,6 +15,7 @@
 #include "../../1-MCAL/04-EXTI/EXTI_interface.h"
 #include "../../1-MCAL/05-ADC/ADC_interface.h"
 #include "../../1-MCAL/06-TIM/TIM_interface.h"
+#include "../../1-MCAL/07-SPI/SPI_interface.h"
 
 #include "SYS_interface.h"
 #include "SYS_private.h"
