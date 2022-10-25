@@ -1,15 +1,15 @@
 /*******************************************************************************/
 /*******************************************************************************/
-/***********************   GRADUATION PROJECT : (IMT)    ***********************/
+/***********************   IMT PROJECT : (MP4-Player)    ***********************/
 /***********************   Layer :MCAL                   ***********************/
-/***********************   SWC (DRIVER):SPI	 			 ***********************/
-/***********************   DATE : 4-9-2022 				 ***********************/
+/***********************   SWC (DRIVER):SPI 			 ***********************/
+/***********************   DATA : 25-10-2022 			 ***********************/
 /*******************************************************************************/
 /*******************************************************************************/
 
 
-#include "../../6-Library/STD_TYPES.h"
-#include "../../6-Library/BIT_MATH.h"
+#include "../../4-Library/STD_TYPES.h"
+#include "../../4-Library/BIT_MATH.h"
 
 #include "SPI_interface.h"
 #include "SPI_config.h"
@@ -17,7 +17,20 @@
 #include "SPI_private.h"
 
 
-void SPI_voidInit(void)
+//Initializng SPI
+void SPI_voidInit(u8 Copy_u8Role)
+{
+	
+}
+
+//Transmitting and recieving data
+u8 SPI_u8Transcieve(u8 Copy_u8Data, u8* Copy_pu8RecivedData)
+{
+	
+}
+
+//Transmitting and recieving Buffer Size
+u8 SPI_u8TranscieveBuffer(u8* Copy_pu8Data, u8* Copy_pu8RecivedData, u8 Copy_u8BufferSize)
 {
 	
 }

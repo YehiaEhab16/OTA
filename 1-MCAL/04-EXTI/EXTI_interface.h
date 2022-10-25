@@ -1,15 +1,26 @@
 /*******************************************************************************/
 /*******************************************************************************/
-/***********************   GRADUATION PROJECT : (IMT)    ***********************/
+/***********************   IMT PROJECT : (MP4-Player)    ***********************/
 /***********************   Layer :MCAL                   ***********************/
 /***********************   SWC (DRIVER):EXTI 			 ***********************/
-/***********************   DATE : 1-9-2022 			 	 ***********************/
+/***********************   DATA : 25-10-2022 			 ***********************/
 /*******************************************************************************/
 /*******************************************************************************/
 
 #ifndef EXTI_INTERFACE_H
 #define EXTI_INTERFACE_H
 
+//Sensing Modes
+#define		 EXTI_FALLING_EDGE		1
+#define		 EXTI_RISING_EDGE		3
+#define		 EXTI_ON_CHANGE			5
+
+//EXTI Line Options
+#define		 EXTI_LINE0			0
+#define		 EXTI_LINE1			1
+#define		 EXTI_LINE2			2
+#define		 EXTI_LINE3			3
+#define		 EXTI_LINE4			4
 
 /**
  * @def function to initialize EXTI
@@ -30,6 +41,11 @@ void EXTI_voidEnableEXTI(u8 Copy_u8InterruptLine);
  * @def function to disable EXTI
  */
 void EXTI_voidDisableEXTI(u8 Copy_u8InterruptLine);
+
+/**
+ * @def function to set software trigger on certain EXTI
+ */
+void EXTI_voidSoftwareTrigger(u8 Copy_u8InterruptLine);
 
 /**
  * @def function to set callback function

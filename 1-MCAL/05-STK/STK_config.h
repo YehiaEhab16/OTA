@@ -2,28 +2,29 @@
 /*******************************************************************************/
 /***********************   IMT PROJECT : (MP4-Player)    ***********************/
 /***********************   Layer :MCAL                   ***********************/
-/***********************   SWC (DRIVER):EXTI 			 ***********************/
+/***********************   SWC (DRIVER):STK 			 ***********************/
 /***********************   DATA : 25-10-2022 			 ***********************/
 /*******************************************************************************/
 /*******************************************************************************/
 
-#ifndef EXTI_REGISTER_H
-#define EXTI_REGISTER_H
+#ifndef STK_CONFIG_H_
+#define STK_CONFIG_H_
 
 
-//EXTI Registers
-typedef struct
-{
-	volatile u32 IMR;	
-	volatile u32 EMR;	
-	volatile u32 RTSR;	
-	volatile u32 FTSR;	
-	volatile u32 SWIER;	
-	volatile u32 PR;
-}EXTI_t;
+/**
+ * Select Option of SLK_CLOCK_PRE :
+ * 									1-AHB_CLOCK_SOURCE
+ * 									2-AHB_8_CLOCK_SOURCE
+ */
 
-//EXTI Base Address
-#define EXTI				((volatile EXTI_t*)0x40010400)
+
+#define SLK_CLOCK_PRE 	 			  AHB_8_CLOCK_SOURCE
+
+
+
+
+
+
 
 
 #endif
