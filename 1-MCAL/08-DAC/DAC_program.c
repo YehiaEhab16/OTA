@@ -2,25 +2,21 @@
 /*******************************************************************************/
 /***********************   IMT PROJECT : (MP4-Player)    ***********************/
 /***********************   Layer :MCAL                   ***********************/
-/***********************   SWC (DRIVER):ADC 			 ***********************/
+/***********************   SWC (DRIVER):DAC 			 ***********************/
 /***********************   DATE : 2-11-2022 			 ***********************/
 /*******************************************************************************/
 /*******************************************************************************/
 
-#ifndef ADC_INTERFACE_H_
-#define ADC_INTERFACE_H_
+#include "../../4-Library/STD_TYPES.h"
+#include "../../4-Library/BIT_MATH.h"
 
-/**
- * @def function to initialize ADC
- */
-void ADC_voidInit(void);
+#include "DAC_interface.h"
+#include "DAC_config.h"
+#include "DAC_private.h"
+#include "DAC_register.h"
 
-/**
- * @def function to start ADC Conversion
- * @param Copy_u8Channel ADC Channel
- * @param Copy_u32Data Data after conversion
- */
-void ADC_voidStartConversion(u8 Copy_u8Channel,u16 *Copy_u16Data);
-
-
-#endif
+//Initializing DAC
+void DAC_voidSetAnalogVolt(u16 Copy_u16Volt)
+{
+	
+}

@@ -2,36 +2,36 @@
 /*******************************************************************************/
 /***********************   IMT PROJECT : (MP4-Player)    ***********************/
 /***********************   Layer :MCAL                   ***********************/
-/***********************   SWC (DRIVER):RCC 			 ***********************/
+/***********************   SWC (DRIVER):DAC 			 ***********************/
 /***********************   DATE : 2-11-2022 			 ***********************/
 /*******************************************************************************/
 /*******************************************************************************/
 
-#ifndef RCC_REGISTER_H_
-#define RCC_REGISTER_H_
+#ifndef DAC_REGISTER_H_
+#define DAC_REGISTER_H_
 
-//RCC Registers
+
+//DAC Registers
 typedef struct
-{
-	volatile u32 CR;
-	volatile u32 CFGR;
-	volatile u32 CIR;   
-	volatile u32 APB2RSTR;
-	volatile u32 APB1RSTR;
-	volatile u32 AHBENR;
-	volatile u32 APB2ENR; 
-	volatile u32 APB1ENR;	
-	volatile u32 BDCR;
-	volatile u32 CSR; 
-}RCC_t;
+{				
+  volatile u32 DAC_CR;
+  volatile u32 DAC_SWTRIGR;
+  volatile u32 DAC_DHR12R1;
+  volatile u32 DAC_DHR12L1;
+  volatile u32 DAC_DHR8R1;
+  volatile u32 DAC_DHR12R2;
+  volatile u32 DAC_DHR12L2;
+  volatile u32 DAC_DHR8R2;
+  volatile u32 DAC_DHR12RD;
+  volatile u32 DAC_DHR12LD;
+  volatile u32 DAC_DHR8RD;
+  volatile u32 DAC_DOR1;
+  volatile u32 DAC_DOR2;
+}DAC_t;
 
-//RCC Base Address
-#define RCC		     ((volatile RCC_t*)0x40021000)
 
-//Control Register Pins
-#define RCC_CR_HSI				0
-#define RCC_CR_HSE		 		16
-#define RCC_CR_PLL				24
+//DAC Base Address
+#define DAC						((volatile DAC_t *)0x40007400)
 
 
 #endif
