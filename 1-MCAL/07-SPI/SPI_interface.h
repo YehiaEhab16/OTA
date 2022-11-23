@@ -34,7 +34,7 @@ void SPI_voidInit(u8 Copy_u8SpiPort,u8 Copy_u8Role);
  * @param Copy_pu8RecivedData: Recieved Data
  * @ret error state: OK / NOK
  */
-u8 SPI_u8Transcieve(u8 Copy_u8SpiPort,u8 Copy_u16TransmitData, u8* Copy_pu16RecivedData);
+u8 SPI_u8Transcieve(u8 Copy_u8SpiPort,u16 Copy_u16TransmitData, u16* Copy_pu16RecivedData);
 
 
 #endif

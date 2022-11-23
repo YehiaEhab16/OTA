@@ -22,6 +22,8 @@
 // States
 #define SPI_DISABLE			0
 #define SPI_ENABLE			1
+#define SPI_IDLE			0
+#define SPI_BUSY			1
 
 // Clock Polarity
 #define FIRST_CLK			0
@@ -45,6 +47,13 @@
 // Data Frame Format
 #define BITS_8				0
 #define BITS_16				1
+
+/**
+ * @def Getting SPI Port and setting correct base address
+ * @param Copy_u8SpiPort: required SPI port
+ * @return SPI base address
+ */
+static SPI_t *SPI_Get(u8 Copy_u8SpiPort);
 
 
 #endif

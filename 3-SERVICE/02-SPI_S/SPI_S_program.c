@@ -16,19 +16,18 @@
 
 #include "SPI_S_interface.h"
 #include "SPI_S_config.h"
-#include "SPI_S_register.h"
 #include "SPI_S_private.h"
 
 
 
-//Initializng SPI
-void SPI_S_voidInit(SPI_d* Copy_pSPI_sData)
+// Initializing SPI
+void SPI_S_voidInit(SPI_s* Copy_pSPI_sData)
 {
-	SPI_voidInit(Copy_pSPI_sData->Copy_u8SpiPort,Copy_pSPI_sData->Copy_u8Role);
+	SPI_voidInit(Copy_pSPI_sData->SPI_u8SpiPort,Copy_pSPI_sData->SPI_u8Role);
 }
 
 //Transmitting and recieving data
-u8 SPI_S_u8Transcieve(SPI_d* Copy_pSPI_sData)
+u8 SPI_S_u8Transcieve(SPI_s* Copy_pSPI_sData)
 {
 	u8 Local_u8ErrorState = OK;
 	
@@ -37,7 +36,7 @@ u8 SPI_S_u8Transcieve(SPI_d* Copy_pSPI_sData)
 								Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_LOW);
 	
 	// Transcieve
-	Local_u8ErrorState = SPI_u8Transcieve(Copy_pSPI_sData->Copy_u8SpiPort,
+	Local_u8ErrorState = SPI_u8Transcieve(Copy_pSPI_sData->SPI_u8SpiPort,
 								Copy_pSPI_sData->SPI_pu16TransmitData[0],Copy_pSPI_sData->SPI_pu16RecivedData);
 	
 	//Set Slave Select Pin
@@ -48,13 +47,13 @@ u8 SPI_S_u8Transcieve(SPI_d* Copy_pSPI_sData)
 }
 
 //Transmitting and recieving Buffer Size
-u8 SPI_S_u8TranscieveBuffer(SPI_d* Copy_pSPI_sData)
+u8 SPI_S_u8TranscieveBuffer(SPI_s* Copy_pSPI_sData)
 {
 	u8 Local_u8ErrorState = OK, Local_u8Counter;
 
 	if((Copy_pSPI_sData->SPI_pu16TransmitData!=NULL) && (Copy_pSPI_sData->SPI_pu16RecivedData!=NULL))
-		for(Local_u8Counter=0;Local_u8Counter<Copy_u8BufferSize; Local_u8Counter++)
-			Local_u8ErrorState = SPI_S_u8Transcieve(*Copy_pSPI_sData);
+		for(Local_u8Counter=0;Local_u8Counter<Copy_pSPI_sData->SPI_u8BufferSize; Local_u8Counter++)
+			Local_u8ErrorState = SPI_S_u8Transcieve(Copy_pSPI_sData);
 
 	else
 		Local_u8ErrorState = NULL_POINTER;

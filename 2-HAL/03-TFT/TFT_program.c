@@ -8,7 +8,7 @@
 /*******************************************************************************/
 
 // Functions Implementation
-#include "../../6-Library/STD_TYPES.h"
+#include "../../4-Library/STD_TYPES.h"
 
 #include "../../1-MCAL/01-GPIO/GPIO_interface.h"
 

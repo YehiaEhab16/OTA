@@ -47,29 +47,29 @@ typedef struct
 	u8 SPI_u8SlaveSelectPort;
 	u8 SPI_u8SlaveSelectPin;
 	u8 SPI_u8BufferSize;
-	u8 *SPI_pu16TransmitData;
-	u8 *SPI_pu16RecivedData;
+	u16 *SPI_pu16TransmitData;
+	u16 *SPI_pu16RecivedData;
 }SPI_s;
 
 /**
  * @def function to initialize SPI
  * @param Copy_pSPI_sData: SPI Struct
  */
-void SPI_S_voidInit(SPI_d* Copy_pSPI_sData);
+void SPI_S_voidInit(SPI_s* Copy_pSPI_sData);
 
 /**
  * @def function to transmit data
  * @param Copy_pSPI_sData: SPI Struct
  * @ret error state: OK / NOK
  */
-u8 SPI_S_u8Transcieve(SPI_d* Copy_pSPI_sData);
+u8 SPI_S_u8Transcieve(SPI_s* Copy_pSPI_sData);
 
 /**
  * @def function to transmit buffer of data
  * @param Copy_pSPI_sData: SPI Struct
  * @ret error state: OK / NOK
  */
-u8 SPI_S_u8TranscieveBuffer(SPI_d* Copy_pSPI_sData);
+u8 SPI_S_u8TranscieveBuffer(SPI_s* Copy_pSPI_sData);
 
 
 #endif
