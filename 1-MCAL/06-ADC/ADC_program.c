@@ -41,6 +41,7 @@ void ADC_voidInit (void)
 	
 	SET_BIT(ADC->CR2,ADON);
 	
+
 }
 
 ADC_Error ADC_voidPriorityChannel (ADC_Channel * Copy_pvChannel , u8 Copy_u8NewPriority)
@@ -186,6 +187,7 @@ ADC_Error ADC_voidSingleSynStartConv (ADC_Channel * Copy_pvChannel, u8 Copy_u8Co
 				Local_u8ErrorState = ADC_u8ConvType ;
 			
 			SET_BIT(ADC->CR2 , SWSTART); 
+
 			while (GET_BIT(ADC->SR , EOC) != 1);
 			#if ADC_DATA_ALIGN == ADC_RIGHT_ALGN
 			*Copy_u16Data = ADC->DR ;
