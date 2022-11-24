@@ -9,10 +9,10 @@
 //*************************************************** ِADC API *******************************************************************/
 typedef enum 
 {
-	u8 ADC_u8OK,
-	u8 ADC_u8IdError , 
-	u8 ADC_u8TypeError ,
-	u8 ADC_u8ConvType 
+	 ADC_u8OK,
+	 ADC_u8IdError ,
+	 ADC_u8TypeError ,
+	 ADC_u8ConvType
 	
 	
 }ADC_Error;
@@ -27,7 +27,7 @@ void ADC_voidDisable (void);
 void ADC_voidEnable (void);
 
 //Disable interrupt 
-void ADC_voidDisableInt (u8 Copy_u8TypeInterrupt);
+u8 ADC_voidDisableInt (u8 Copy_u8TypeInterrupt);
 
 
 
@@ -83,7 +83,7 @@ ADC_Error ADC_voidPriorityChannel (ADC_Channel * Copy_pvChannel , u8 Copy_u8NewP
 ADC_Error ADC_voidChangeChannel (ADC_Channel * Copy_pvChannel , u8 Copy_u8NewChannel);
 
 // Change the conversion mode of the channel 
-ADC_Error ADC_voidSingleASynStartConv (ADC_Channel * Copy_pvChannel , u8 Copy_u8ConvType , u16 * Copy_u16Data,, void(*Copy_pvNotify)(void) );
+ADC_Error ADC_voidSingleASynStartConv (ADC_Channel * Copy_pvChannel , u8 Copy_u8ConvType , u16 * Copy_u16Data, void(*Copy_pvNotify)(void) );
 
 //Start the conversion as synchronous
 ADC_Error ADC_voidSingleSynStartConv (ADC_Channel * Copy_pvChannel, u8 Copy_u8ConvType , u16 * Copy_u16Data );

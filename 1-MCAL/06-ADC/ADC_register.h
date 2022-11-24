@@ -20,7 +20,7 @@ typedef struct
   volatile u32 SQR3;
   volatile u32 JSQR;
   volatile u32 JDR1[4];
-  volatile u32 ;
+  volatile u32 DR;
 }ADC_t;
 
 // Bits ADC Status Register 
@@ -41,7 +41,7 @@ typedef struct
 #define JEOCIE		7
 #define EOCIE		5
 
-#define ADC   (volatile ADC_t *)(0x40012400)
+#define ADC   ((volatile ADC_t *)(0x40012400))
 
 
 
