@@ -48,12 +48,51 @@
 #define BITS_8				0
 #define BITS_16				1
 
+//Port Options
+#define GPIO_PORTA          0
+#define GPIO_PORTB          1
+#define GPIO_PORTC          2
+
+//Pin Options
+#define GPIO_PIN_0			0
+#define GPIO_PIN_1          1
+#define GPIO_PIN_2          2
+#define GPIO_PIN_3          3
+#define GPIO_PIN_4          4
+#define GPIO_PIN_5          5
+#define GPIO_PIN_6          6
+#define GPIO_PIN_7          7
+#define GPIO_PIN_8          8
+#define GPIO_PIN_9          9
+#define GPIO_PIN_10         10
+#define GPIO_PIN_11         11
+#define GPIO_PIN_12         12
+#define GPIO_PIN_13         13
+#define GPIO_PIN_14         14
+#define GPIO_PIN_15         15
+
+//Pin and Port States
+#define GPIO_PORT_HIGH		0xff
+#define GPIO_PORT_LOW		0
+
+#define GPIO_PIN_HIGH		1
+#define GPIO_PIN_LOW		0
+
 /**
  * @def Getting SPI Port and setting correct base address
  * @param Copy_u8SpiPort: required SPI port
  * @return SPI base address
  */
 static SPI_t *SPI_Get(u8 Copy_u8SpiPort);
+
+/**
+ * @def function that sets output value to specific pin
+ * @param Copy_u8Port required GPIO Port
+ * @param Copy_u8Pin required GPIO Pin
+ * @param Copy_u8Value required Output Value
+ * @return ErrorFlag
+ */
+static u8 GPIO_u8SetPinValue (u8 Copy_u8Port, u8 Copy_u8Pin,u8 Copy_u8Value);
 
 
 #endif

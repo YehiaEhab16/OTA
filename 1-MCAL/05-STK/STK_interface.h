@@ -17,7 +17,7 @@
  * 							3- Select the prescaler CLK
  *
  */
-void STK_voidInit(void) 						;
+void STK_voidInit(void);
 
 /**
  * @def Enable the timer
@@ -57,12 +57,6 @@ u8 STK_u8GetTime (void);
  * @return remainning time
  */
 u8 STK_u8GetRemainigTime(void);
-
-
-
-
-
-
 
 
 

@@ -31,16 +31,16 @@ static SPI_t *SPI_Get(u8 Copy_u8SpiPort)
 }
 
 //Initializing SPI
-void SPI_voidInit(u8 Copy_u8SpiPort,u8 Copy_u8Role)
+void SPI_voidInit(SPI_s* Copy_pSPI_sData)
 {	
 	// Select SPI
-	SPI_t *SPI = SPI_Get(Copy_u8SpiPort);
+	SPI_t *SPI = SPI_Get(Copy_pSPI_sData->SPI_u8SpiPort);
 	
 	// Initial Configurations
 	SPI->CR1=SPI_REG_INIT;
 	
 	// Master or slave selection
-	if(Copy_u8Role== SPI_SLAVE)
+	if(Copy_pSPI_sData->SPI_u8Role== SPI_SLAVE)
 		CLR_BIT(SPI->CR1,SPI_CR1_MSTR);
 	else
 		SET_BIT(SPI->CR1,SPI_CR1_MSTR);
@@ -53,41 +53,49 @@ void SPI_voidInit(u8 Copy_u8SpiPort,u8 Copy_u8Role)
 	SET_BIT(SPI->CR1,SPI_CR1_SPE);
 }
 
-//Transmitting and receiving data
-u8 SPI_u8Transcieve(u8 Copy_u8SpiPort,u16 Copy_u16TransmitData, u16* Copy_pu16RecivedData)
+//Transmitting and recieving Buffer Size
+u8 SPI_u8Transcieve(SPI_s* Copy_pSPI_sData)
 {
-	u8 Local_u8ErrorState = OK;
+	u8 Local_u8ErrorState = OK, Local_u8Counter;
 	u32 Local_u32Counter=0;
 	
-	SPI_t *SPI = SPI_Get(Copy_u8SpiPort);
+	SPI_t *SPI = SPI_Get(Copy_pSPI_sData->SPI_u8SpiPort);
 
-	if(Copy_pu16RecivedData!=NULL)
-	{
-		if(SPI_u8State==SPI_IDLE)
-		{	
-			// Set State to SPI_BUSY
-			SPI_u8State=SPI_BUSY;
+	if((Copy_pSPI_sData->SPI_pu16TransmitData!=NULL) && (Copy_pSPI_sData->SPI_pu16RecivedData!=NULL))
+		for(Local_u8Counter=0;Local_u8Counter<Copy_pSPI_sData->SPI_u8BufferSize; Local_u8Counter++)
+		{
+			if(SPI_u8State==SPI_IDLE)
+			{	
+				// Set State to SPI_BUSY
+				SPI_u8State=SPI_BUSY;
 	
-			// Send Data
-			SPI->DR = Copy_u16TransmitData;
+				GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
+								,Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_LOW);
+					
+				// Send Data
+				SPI->DR = Copy_pSPI_sData->SPI_pu16TransmitData[Local_u8Counter];
 	
-			// Wait on SPI_BUSY Flag
-			while(((GET_BIT(SPI->SR, SPI_SR_BSY))==0) && (Local_u32Counter<SPI_TIMEOUT))
-				Local_u32Counter++;
-			// Recieve Data
-			if(Local_u32Counter==SPI_TIMEOUT)
-				Local_u8ErrorState = TIMEOUT_STATE;
-			else
-				*Copy_pu16RecivedData = SPI->DR;
+				// Wait on SPI_BUSY Flag
+				while(((GET_BIT(SPI->SR, SPI_SR_BSY))==0) && (Local_u32Counter<SPI_TIMEOUT))
+					Local_u32Counter++;
+				// Recieve Data
+				if(Local_u32Counter==SPI_TIMEOUT)
+					Local_u8ErrorState = TIMEOUT_STATE;
+				else
+					Copy_pSPI_sData->SPI_pu16RecivedData[Local_u8Counter] = SPI->DR;
+				
+				GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
+								,Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_HIGH);
 			
-			// Set State to SPI_IDLE
-			SPI_u8State=SPI_IDLE;
+				// Set State to SPI_IDLE
+				SPI_u8State=SPI_IDLE;
+			}
+			else
+				Local_u8ErrorState=BUSY_STATE;
 		}
-		else
-			Local_u8ErrorState=BUSY_STATE;
-	}
-	else
-		Local_u8ErrorState=NULL_POINTER;
 
+	else
+		Local_u8ErrorState = NULL_POINTER;
+	
 	return Local_u8ErrorState;
 }

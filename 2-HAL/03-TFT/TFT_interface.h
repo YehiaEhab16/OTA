@@ -35,8 +35,15 @@
 #define TFT_PIN15					GPIO_PIN_15
 
 /**
- * @def TFT Display
+ * @def Initialize Screen
  */
-void TFT_voidDisplay(void);
+void TFT_voidInit(void);
+
+/**
+ * @def TFT Display Image
+ * @param Copy_pu8Image Image to be displayed
+ */
+void TFT_voidDisplayImage(const u8* Copy_pu8Image);
+
 
 #endif
