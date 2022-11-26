@@ -46,11 +46,15 @@ void STK_voidDisableTimer (void)
 }
 
 
-void STK_voidDelay(u32 Copy_u8TimeMilleSecond)
+void STK_voidDelay(u32 Copy_u8TimeSecond, u8 Copy_u8Type)
 {
 
 	u32 Local_u8LoadVal ;
-	Local_u8LoadVal= Copy_u8TimeMilleSecond*1000;
+	if (Copy_u8Type == TIME_MILLE_SEC)
+		Local_u8LoadVal= Copy_u8TimeSecond*1000;
+	else
+		Local_u8LoadVal=Copy_u8TimeSecond ;
+
 	/*Set the value in Load Register */
 	STK->STK_LOAD = Local_u8LoadVal;
 	/*Initial Value Register =0 */

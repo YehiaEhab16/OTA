@@ -10,6 +10,10 @@
 #ifndef STK_INTERFACE_H_
 #define STK_INTERFACE_H_
 
+
+
+#define TIME_MILLE_SEC 			0
+#define TIME_MICRO_SEC			1
 /**
  *
  * @def Init System ticks : 1- Disable System Tick
@@ -17,7 +21,7 @@
  * 							3- Select the prescaler CLK
  *
  */
-void STK_voidInit(void);
+void STK_voidInit(void) ;
 
 /**
  * @def Enable the timer
@@ -32,7 +36,8 @@ void STK_voidDisableTimer (void);
  * @def Delay Function by Mille Second
  * @param Copy_u8TimeMilleSecond :Time by Mille Second
  */
-void STK_voidDelay(u32 Copy_u8TimeMilleSecond);
+void STK_voidDelay(u32 Copy_u8TimeSecond, u8 Copy_u8Type);
+
 /**
  * @def Delay Function by Mille Second Asynchronous Single iteration
  * @param Copy_u8TimeMilleSecond  Time with Mille Second
@@ -57,6 +62,12 @@ u8 STK_u8GetTime (void);
  * @return remainning time
  */
 u8 STK_u8GetRemainigTime(void);
+
+
+
+
+
+
 
 
 
