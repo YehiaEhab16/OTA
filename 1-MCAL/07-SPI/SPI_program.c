@@ -68,8 +68,9 @@ u8 SPI_u8Transcieve(SPI_s* Copy_pSPI_sData)
 			{	
 				// Set State to SPI_BUSY
 				SPI_u8State=SPI_BUSY;
-	
-				GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
+
+				if(Copy_pSPI_sData->SPI_u8Role==SPI_MASTER)
+					GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
 								,Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_LOW);
 					
 				// Send Data
@@ -84,7 +85,8 @@ u8 SPI_u8Transcieve(SPI_s* Copy_pSPI_sData)
 				else
 					Copy_pSPI_sData->SPI_pu16RecivedData[Local_u8Counter] = SPI->DR;
 				
-				GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
+				if(Copy_pSPI_sData->SPI_u8Role==SPI_MASTER)
+					GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
 								,Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_HIGH);
 			
 				// Set State to SPI_IDLE

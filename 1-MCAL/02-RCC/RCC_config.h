@@ -15,7 +15,7 @@
 //GPIIOs
 #define RCC_IOPA_STATE	                 RCC_ENABLE
 #define RCC_IOPB_STATE	                 RCC_ENABLE
-#define RCC_IOPC_STATE	                 RCC_ENABLE
+#define RCC_IOPC_STATE	                 RCC_DISABLE
 #define RCC_IOPD_STATE	                 RCC_DISABLE
 #define RCC_IOPE_STATE	                 RCC_DISABLE
 #define RCC_IOPF_STATE	                 RCC_DISABLE
@@ -30,8 +30,8 @@
 #define RCC_DAC_STATE					 RCC_DISABLE
 
 //Timers
-#define RCC_TIM1_STATE	                 RCC_ENABLE
-#define RCC_TIM2_STATE	                 RCC_ENABLE
+#define RCC_TIM1_STATE	                 RCC_DISABLE
+#define RCC_TIM2_STATE	                 RCC_DISABLE
 #define RCC_TIM3_STATE	                 RCC_DISABLE
 #define RCC_TIM4_STATE	                 RCC_DISABLE
 #define RCC_TIM5_STATE	                 RCC_DISABLE
@@ -46,13 +46,13 @@
 #define RCC_TIM14_STATE	             	 RCC_DISABLE
 
 //Communication Protocols
-#define RCC_USART1_STATE	             RCC_ENABLE
+#define RCC_USART1_STATE	             RCC_DISABLE
 #define RCC_USART2_STATE	             RCC_DISABLE
 #define RCC_USART3_STATE	             RCC_DISABLE
 #define RCC_UART4_STATE	             	 RCC_DISABLE
 #define RCC_UART5_STATE	              	 RCC_DISABLE
 
-#define RCC_SPI1_STATE	                 RCC_DISABLE
+#define RCC_SPI1_STATE	                 RCC_ENABLE
 #define RCC_SPI2_STATE	                 RCC_DISABLE
 #define RCC_SPI3_STATE	                 RCC_DISABLE
 
