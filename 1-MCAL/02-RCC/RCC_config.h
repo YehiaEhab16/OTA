@@ -53,21 +53,21 @@
 #define RCC_UART5_STATE	              	 RCC_DISABLE
 
 #define RCC_SPI1_STATE	                 RCC_ENABLE
-#define RCC_SPI2_STATE	                 RCC_DISABLE
-#define RCC_SPI3_STATE	                 RCC_DISABLE
+#define RCC_SPI2_STATE	                 RCC_ENABLE
+#define RCC_SPI3_STATE	                 RCC_ENABLE
 
 #define RCC_I2C1_STATE	                 RCC_DISABLE
 #define RCC_I2C2_STATE	                 RCC_DISABLE
 
-#define RCC_CAN_STATE	                 RCC_ENABLE
-#define RCC_USB_STATE	                 RCC_ENABLE
+#define RCC_CAN_STATE	                 RCC_DISABLE
+#define RCC_USB_STATE	                 RCC_DISABLE
 
 //Watchdog
-#define RCC_WWDG_STATE	                 RCC_ENABLE
+#define RCC_WWDG_STATE	                 RCC_DISABLE
 
 //Memory Access
-#define RCC_DMA1_STATE		             RCC_DISABLE
-#define RCC_DMA2_STATE		             RCC_DISABLE
+#define RCC_DMA1_STATE		             RCC_ENABLE
+#define RCC_DMA2_STATE		             RCC_ENABLE
 #define RCC_SRAM_STATE		             RCC_DISABLE
 #define RCC_FLITF_STATE		             RCC_DISABLE
 #define RCC_FSMC_STATE		             RCC_DISABLE
