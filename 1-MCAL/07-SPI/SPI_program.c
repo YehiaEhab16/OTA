@@ -41,24 +41,20 @@ void SPI_voidInit(SPI_s* Copy_pSPI_sData)
 	
 	// Master or slave selection
 	if(Copy_pSPI_sData->SPI_u8Role== SPI_SLAVE)
-		CLR_BIT(SPI->CR1,SPI_CR1_MSTR);
-	else
 	{
-		SET_BIT(SPI->CR1,SPI_CR1_SSI);
+		CLR_BIT(SPI->CR1,SPI_CR1_MSTR);
 		SET_BIT(SPI->CR1,SPI_CR1_SSM);
-		SET_BIT(SPI->CR1,SPI_CR1_MSTR);
+		SET_BIT(SPI->CR1,SPI_CR1_SSI);
 	}
-
+	else
+		SET_BIT(SPI->CR1,SPI_CR1_MSTR);
+	
 	// Baud Rate
 	SPI->CR1&=BAUD_RATE_MASK;
 	SPI->CR1|=SPI_BAUD_RATE;
-
-	// DMA for TX and RX
-	SET_BIT(SPI->CR2,SPI_CR2_RXDMAEN);
-	SET_BIT(SPI->CR2,SPI_CR2_TXDMAEN);
 	
-	// Enable Peripheral
 	SET_BIT(SPI->CR1,SPI_CR1_SPE);
+
 }
 
 //Transmitting and recieving Buffer Size
@@ -69,7 +65,7 @@ u8 SPI_u8Transcieve(SPI_s* Copy_pSPI_sData)
 	
 	SPI_t *SPI = SPI_Get(Copy_pSPI_sData->SPI_u8SpiPort);
 
-	if((Copy_pSPI_sData->SPI_pu16TransmitData!=NULL) && (Copy_pSPI_sData->SPI_pu16RecivedData!=NULL))
+	if((Copy_pSPI_sData->SPI_pu16TransmitData!=NULL))
 		for(Local_u8Counter=0;Local_u8Counter<Copy_pSPI_sData->SPI_u8BufferSize; Local_u8Counter++)
 		{
 			if(SPI_u8State==SPI_IDLE)
@@ -80,38 +76,19 @@ u8 SPI_u8Transcieve(SPI_s* Copy_pSPI_sData)
 				if(Copy_pSPI_sData->SPI_u8Role==SPI_MASTER)
 					GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
 								,Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_LOW);
-
-				while(GET_BIT(SPI->SR,SPI_SR_TXE)==0)
+					
+				// Send Data
+ 				SPI->DR = Copy_pSPI_sData->SPI_pu16TransmitData[0];
+	
+				// Wait on SPI_BUSY Flag
+				while(((GET_BIT(SPI->SR, SPI_SR_BSY))==1) && (Local_u32Counter<SPI_TIMEOUT))
 					Local_u32Counter++;
-
+				// Recieve Data
 				if(Local_u32Counter==SPI_TIMEOUT)
 					Local_u8ErrorState = TIMEOUT_STATE;
-
 				else
-				{
-					// Send Data
-					SPI->DR = 5;//Copy_pSPI_sData->SPI_pu16TransmitData[Local_u8Counter];
-
-					// Wait on SPI_BUSY Flag
-					Local_u32Counter=0;
-					while(((GET_BIT(SPI->SR, SPI_SR_BSY))==0) && (Local_u32Counter<SPI_TIMEOUT))
-						Local_u32Counter++;
+					Copy_pSPI_sData->SPI_pu16RecivedData[Local_u8Counter] = SPI->DR;
 				
-					// Recieve Data
-					if(Local_u32Counter==SPI_TIMEOUT)
-						Local_u8ErrorState = TIMEOUT_STATE;
-					else
-					{
-						Local_u32Counter=0;
-						while(GET_BIT(SPI->SR,SPI_SR_RXNE)==0)
-							Local_u32Counter++;
-
-						if(Local_u32Counter==SPI_TIMEOUT)
-							Local_u8ErrorState = TIMEOUT_STATE;
-						else
-							Copy_pSPI_sData->SPI_pu16RecivedData[Local_u8Counter] = SPI->DR;
-					}
-				}
 				if(Copy_pSPI_sData->SPI_u8Role==SPI_MASTER)
 					GPIO_u8SetPinValue(Copy_pSPI_sData->SPI_u8SlaveSelectPort
 								,Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_HIGH);

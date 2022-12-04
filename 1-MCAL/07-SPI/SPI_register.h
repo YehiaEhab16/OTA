@@ -65,11 +65,6 @@ typedef struct
 #define SPI_CR1_BIDIOE			14
 #define SPI_CR1_BIDIMODE		15
 
-#define SPI_CR2_RXDMAEN			0
-#define SPI_CR2_TXDMAEN			1
-
-#define SPI_SR_RXNE				0
-#define SPI_SR_TXE				1
 #define SPI_SR_BSY				7
 
 #endif

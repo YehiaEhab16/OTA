@@ -47,8 +47,8 @@ typedef struct
 	u8 SPI_u8SlaveSelectPort;
 	u8 SPI_u8SlaveSelectPin;
 	u8 SPI_u8BufferSize;
-	u16 *SPI_pu16TransmitData;
-	u16 *SPI_pu16RecivedData;
+	u16 SPI_pu16TransmitData[3];
+	u16 SPI_pu16RecivedData[3];
 }SPI_s;
 
 /**

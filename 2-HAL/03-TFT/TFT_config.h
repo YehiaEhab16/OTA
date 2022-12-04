@@ -15,8 +15,8 @@
 
 #define TFT_CTRL_PORT		TFT_PORTA
 
-#define TFT_RST_PIN			TFT_PIN0
-#define TFT_A0_PIN			TFT_PIN1
+#define TFT_RST_PIN			TFT_PIN1
+#define TFT_A0_PIN			TFT_PIN2
 
 
 #endif

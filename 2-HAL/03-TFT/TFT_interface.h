@@ -43,7 +43,7 @@ void TFT_voidInit(void);
  * @def TFT Display Image
  * @param Copy_pu8Image Image to be displayed
  */
-void TFT_voidDisplayImage(const u8* Copy_pu8Image);
+void TFT_voidDisplayImage(const u16* Copy_pu8Image);
 
 
 #endif

@@ -17,27 +17,28 @@
 #include "TFT_config.h"
 #include "TFT_interface.h"
 #include "TFT_private.h"
+SPI_s Local_SPi_sCom = {SPI1_PORT,SPI_MASTER,SPI_PORTA,SPI_PIN9,1};
 
 // Initializing TFT
 void TFT_voidInit(void)
 {
 	STK_voidInit();
-	
+	SPI_voidInit(&Local_SPi_sCom);
 	// Reset Pulse
 	GPIO_u8SetPinValue(TFT_CTRL_PORT,TFT_RST_PIN,GPIO_PIN_HIGH);
-	STK_voidDelay(100);
+	STK_voidDelay(100,TIME_MICRO_SEC);
 	GPIO_u8SetPinValue(TFT_CTRL_PORT,TFT_RST_PIN,GPIO_PIN_LOW);
-	STK_voidDelay(1);
+	STK_voidDelay(1,TIME_MICRO_SEC);
 	GPIO_u8SetPinValue(TFT_CTRL_PORT,TFT_RST_PIN,GPIO_PIN_HIGH);
-	STK_voidDelay(100);
+	STK_voidDelay(100,TIME_MICRO_SEC);
 	GPIO_u8SetPinValue(TFT_CTRL_PORT,TFT_RST_PIN,GPIO_PIN_LOW);
-	STK_voidDelay(100);
+	STK_voidDelay(100,TIME_MICRO_SEC);
 	GPIO_u8SetPinValue(TFT_CTRL_PORT,TFT_RST_PIN,GPIO_PIN_HIGH);
-	STK_voidDelay(120000);
+	STK_voidDelay(120000,TIME_MICRO_SEC);
 	
 	// Sleep Out Command
 	TFT_voidSendCommand(0x11);
-	STK_voidDelay(150000);
+	STK_voidDelay(150000,TIME_MICRO_SEC);
 	
 	// Color Mode
 	TFT_voidSendCommand(0x3A);
@@ -50,25 +51,22 @@ void TFT_voidInit(void)
 // Sending Command to TFT
 void TFT_voidSendCommand(u8 Copy_u8Command)
 {
-	SPI_s Local_SPi_sCom = {SPI1_PORT,SPI_MASTER,SPI_PORTA,SPI_PIN9,1};
-	
 	GPIO_u8SetPinValue(TFT_CTRL_PORT,TFT_A0_PIN,GPIO_PIN_LOW);
-	Local_SPi_sCom.SPI_pu16TransmitData[0]=Copy_u8Command;
+	Local_SPi_sCom.SPI_pu16TransmitData[0]= Copy_u8Command;
 	SPI_u8Transcieve(&Local_SPi_sCom);
 }
 
 // Sending Data to TFT
 void TFT_voidSendData(u8 Copy_u8Data)
 {
-	SPI_s Local_SPi_sCom = {SPI1_PORT,SPI_MASTER,SPI_PORTA,SPI_PIN9,1};
-	
+
 	GPIO_u8SetPinValue(TFT_CTRL_PORT,TFT_A0_PIN,GPIO_PIN_HIGH);
 	Local_SPi_sCom.SPI_pu16TransmitData[0]=Copy_u8Data;
 	SPI_u8Transcieve(&Local_SPi_sCom);
 }
 
 // Displaying on TFT
-void TFT_voidDisplayImage(const u8* Copy_pu8Image)
+void TFT_voidDisplayImage(const u16* Copy_pu8Image)
 {
 	u16 Local_u16Counter;
 	
@@ -90,7 +88,7 @@ void TFT_voidDisplayImage(const u8* Copy_pu8Image)
 	TFT_voidSendData(0);
 	TFT_voidSendData(159);
 	
-	for(Local_u16Counter;Local_u16Counter<TFT_PIXELS;Local_u16Counter++)
+	for(Local_u16Counter=0;Local_u16Counter<TFT_PIXELS;Local_u16Counter++)
 	{
 		// High Byte
 		TFT_voidSendData(Copy_pu8Image[Local_u16Counter]>>8);
