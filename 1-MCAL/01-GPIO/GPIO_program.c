@@ -69,35 +69,39 @@ u8 GPIO_u8SetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin,u8 Copy_u8Value)
 }
 
 //Setting Output for a certain port
-u8 GPIO_u8SetPortValue(u8 Copy_u8Port,u8 Copy_u8Value)
+u8 GPIO_u8SetPortValue(u8 Copy_u8Port,u16 Copy_u16Value)
 {
 	u8 Local_u8ErrorState =OK;
-	//Output High
-	if(Copy_u8Value == GPIO_PORT_HIGH)
-		switch (Copy_u8Port)
-		{
-			case GPIO_PORTA : GPIOA->ODR = Copy_u8Port;break;
-			case GPIO_PORTB : GPIOB->ODR = Copy_u8Port;break;
-			case GPIO_PORTC : GPIOC->ODR = Copy_u8Port;break;
-			default : Local_u8ErrorState =NOK;		   break;	
-		}
-	//Output Low	
-	else if(Copy_u8Value == GPIO_PORT_LOW)
-		switch (Copy_u8Port)
-		{
-			case GPIO_PORTA : GPIOA->ODR = Copy_u8Port;break;
-			case GPIO_PORTB : GPIOB->ODR = Copy_u8Port;break;	
-			case GPIO_PORTC : GPIOC->ODR = Copy_u8Port;break;	
-			default : Local_u8ErrorState =NOK ; break;
-		} 			
-	//Wrong Input	
-	else 
-		Local_u8ErrorState =NOK;
+	switch (Copy_u8Port)
+	{
+		case GPIO_PORTA : GPIOA->ODR = Copy_u16Value;break;
+		case GPIO_PORTB : GPIOB->ODR = Copy_u16Value;break;
+		case GPIO_PORTC : GPIOC->ODR = Copy_u16Value;break;
+		default : Local_u8ErrorState =NOK;		    break;
+	}
 		
 	return Local_u8ErrorState;
 }
 
-//Toggling output on a certin pin
+//Setting Output for a certain port
+u8 GPIO_u8SetHalfPortValue(u8 Copy_u8Port,u8 Copy_u8Value)
+{
+	u8 Local_u8ErrorState =OK;
+	switch (Copy_u8Port)
+	{
+		case GPIO_PORTA_LSB : GPIOA->ODR = Copy_u8Value;break;
+		case GPIO_PORTB_LSB : GPIOB->ODR = Copy_u8Value;break;
+		case GPIO_PORTC_LSB : GPIOC->ODR = Copy_u8Value;break;
+		case GPIO_PORTA_MSB : GPIOA->ODR &= 0x0f;GPIOA->ODR |= (Copy_u8Value<<8);break;
+	    case GPIO_PORTB_MSB : GPIOB->ODR &= 0x0f;GPIOB->ODR |= (Copy_u8Value<<8);break;
+		case GPIO_PORTC_MSB : GPIOC->ODR &= 0x0f;GPIOB->ODR |= (Copy_u8Value<<8);break;
+		default : Local_u8ErrorState = NOK;		   		break;
+	}
+
+	return Local_u8ErrorState;
+}
+
+//Toggling output on a certain pin
 u8 GPIO_u8TogglePinValue(u8 Copy_u8Port, u8 Copy_u8Pin)
 {
 	u8 Local_u8ErrorState = OK; 

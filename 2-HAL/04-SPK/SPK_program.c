@@ -18,7 +18,7 @@
 
 
 // Output Sound
-void SPK_voidOutput(void)
+void SPK_voidOutput(u8 Copy_u8AnalogValue)
 {
-	
+	GPIO_u8SetHalfPortValue(SPK_PORT, Copy_u8AnalogValue);
 }

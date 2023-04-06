@@ -15,6 +15,13 @@
 #define GPIO_PORTB          1
 #define GPIO_PORTC          2
 
+#define GPIO_PORTA_LSB      3
+#define GPIO_PORTA_MSB      4
+#define GPIO_PORTB_LSB      5
+#define GPIO_PORTB_MSB      6
+#define GPIO_PORTC_LSB      7
+#define GPIO_PORTC_MSB      8
+
 //Pin Options
 #define GPIO_PIN_0			0
 #define GPIO_PIN_1          1
@@ -34,7 +41,7 @@
 #define GPIO_PIN_15         15
 
 //Pin and Port States
-#define GPIO_PORT_HIGH		0xff
+#define GPIO_PORT_HIGH		0xffff
 #define GPIO_PORT_LOW		0
 
 #define GPIO_PIN_HIGH		1
@@ -57,10 +64,18 @@ u8 GPIO_u8SetPinValue (u8 Copy_u8Port, u8 Copy_u8Pin,u8 Copy_u8Value);
 /**
  * @def function that sets output value to specific port
  * @param Copy_u8Port required GPIO Port
+ * @param Copy_u16Value required Output Value
+ * @return ErrorFlag
+ */
+u8 GPIO_u8SetPortValue (u8 Copy_u8Port,u16 Copy_u16Value);
+
+/**
+ * @def function that sets output value to half port
+ * @param Copy_u8Port required GPIO Port
  * @param Copy_u8Value required Output Value
  * @return ErrorFlag
  */
-u8 GPIO_u8SetPortValue (u8 Copy_u8Port,u8 Copy_u8Value);
+u8 GPIO_u8SetHalfPortValue (u8 Copy_u8Port,u8 Copy_u8Value);
 
 /**
  * @def function that gets toggles output on specific pin

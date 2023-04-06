@@ -36,7 +36,8 @@
 
 /**
  * @def SPK Output Sound
+ * @param Copy_u8AnalogValue: Analog value to be displayd by speaker
  */
-void SPK_voidDisplay(void);
+void SPK_voidOutput(u8 Copy_u8AnalogValue);
 
 #endif
