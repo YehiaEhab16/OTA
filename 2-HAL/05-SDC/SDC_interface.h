@@ -53,5 +53,6 @@ static SD_RETURN_CODES sd_command_ACMD41(SPI_s * Copy_SPI_SDCard);
 static u8 sd_read_response1(SPI_s * Copy_SPI_SDCard);
 static void sd_read_response3_7(u8 *res ,SPI_s * Copy_SPI_SDCard);
 SD_RETURN_CODES sd_init(void);
+u8 SD_u8ReadSingleBlock(u32 addr, u8 *buf);
 
 #endif
