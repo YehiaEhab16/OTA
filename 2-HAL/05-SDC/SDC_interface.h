@@ -13,6 +13,16 @@
 #define SDC_INTERFACE_H_
 
 
+typedef enum {
+	SD_OK,
+	SD_IDLE_STATE_TIMEOUT,
+	SD_GENERAL_ERROR,
+	SD_CHECK_PATTERN_MISMATCH,
+	SD_NONCOMPATABLE_VOLTAGE_RANGE,
+	SD_POWER_UP_BIT_NOT_SET,
+	SD_NOT_SD_CARD
+}SD_RETURN_CODES;
+
 #define SDC_PORTA					GPIO_PORTA
 #define SDC_PORTB					GPIO_PORTB
 #define SDC_PORTC					GPIO_PORTC
@@ -38,5 +48,10 @@
  * @def SDC Initialization
  */
 void SDC_voidInit(void);
+static void sd_command(u8 cmd, u32 arg, u8 crc , SPI_s * Copy_SPI_SDCard);
+static SD_RETURN_CODES sd_command_ACMD41(SPI_s * Copy_SPI_SDCard);
+static u8 sd_read_response1(SPI_s * Copy_SPI_SDCard);
+static void sd_read_response3_7(u8 *res ,SPI_s * Copy_SPI_SDCard);
+SD_RETURN_CODES sd_init(void);
 
 #endif

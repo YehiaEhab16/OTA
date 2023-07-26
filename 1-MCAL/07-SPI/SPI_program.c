@@ -78,7 +78,7 @@ u8 SPI_u8Transcieve(SPI_s* Copy_pSPI_sData)
 								,Copy_pSPI_sData->SPI_u8SlaveSelectPin,GPIO_PIN_LOW);
 					
 				// Send Data
- 				SPI->DR = Copy_pSPI_sData->SPI_pu16TransmitData[0];
+ 				SPI->DR = Copy_pSPI_sData->SPI_pu16TransmitData[Local_u8Counter];
 	
 				// Wait on SPI_BUSY Flag
 				while(((GET_BIT(SPI->SR, SPI_SR_BSY))==1) && (Local_u32Counter<SPI_TIMEOUT))
@@ -105,3 +105,4 @@ u8 SPI_u8Transcieve(SPI_s* Copy_pSPI_sData)
 	
 	return Local_u8ErrorState;
 }
+
