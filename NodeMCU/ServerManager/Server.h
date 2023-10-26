@@ -5,44 +5,23 @@
 
 //Define the WiFi credentials
 
-#define WIFI_SSID                       "MOG Controllers"
-#define WIFI_PASSWORD                   "mog22020"
+#define WIFI_SSID                       "OTA_WIFI"
+#define WIFI_PASSWORD                   "123456789"
 
-// #define WIFI_SSID                         "Handasa2"
-// #define WIFI_PASSWORD                     "EmanAdel01096629979"
+#define UPDATE_NOTIFICATION             'u'
+#define START_SEND                      's'
+
+#define BAUD_RATE                       115200
 
 
-//Define the API Key
-#define API_KEY                         "AIzaSyBRrnJB5r0m9v9YsBj-em7ZefzYT4LVkp4"
-#define DATABASE_URL                    "https://fota-project-new-default-rtdb.firebaseio.com/"
+//Function to establish server
+void Server_Begin(void);
 
-//Define the user Email and password that alreadey registerd or added in your project
-#define USER_EMAIL                      "fota.project2022@gmail.com"
-#define USER_PASSWORD                   "fota123123"
-
-//Define the Firebase storage bucket ID e.g bucket-name.appspot.com
-#define STORAGE_BUCKET_ID               "fota-project-new.appspot.com"
-
-#define BAUD_RATE                       9600
-#define RXD2 16
-#define TXD2 17
-
-#define UPDATE_NOTIFICATION           'P'
-
-//Function to connect to Wifi
-void Wifi_Connect(void);
-
-//Function to establish connection with server
-void Server_Connect(void);
+//Function to check for new update
+int Server_NewUpdate(void);
 
 //Function to download file from server
-void Server_Download(String file);
-
-int Version_Recieve(void); 
-
-void UpdateCheck(void);
-
-void WriteDiagnostics(int data);
+String Server_Download(void);
 
 
 #endif
